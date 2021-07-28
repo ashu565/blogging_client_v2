@@ -1,0 +1,33 @@
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+  &_data {
+    display: flex;
+    align-items: center;
+    margin: 0.4rem 0.6rem 0.4rem 0;
+    border-radius: 0.25em;
+    border: 1px solid black;
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(129, 232, 250);
+    }
+    &_tag {
+      font-weight: 400;
+      padding: 0px 0.3rem 0px 0.525rem;
+      margin: 0.2rem 0.2rem;
+      font-size: 1.1rem;
+    }
+    &_length {
+      font-weight: 400;
+      padding: 0.2rem 0.5rem;
+      margin-left: 0.2rem;
+      border-top-right-radius: 0.2em;
+      border-bottom-right-radius: 0.2em;
+      font-size: 1.1rem;
+      color: #fff;
+      z-index: 1;
+      background-color: black;
+    }
+  }
+}

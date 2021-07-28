@@ -1,0 +1,94 @@
+.header {
+  display: flex;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+  padding: 0 3rem;
+  font-family: "Roboto", sans-serif;
+  background-color: #fff;
+  // color: #000;
+  color: #546e7a;
+  width: 100%;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  &_left {
+    display: flex;
+    align-items: center;
+    img {
+      height: 3.2rem;
+      margin-right: 2rem;
+      cursor: pointer;
+    }
+    a {
+      text-decoration: none;
+      margin-right: 0.8rem;
+      color: #546e7a;
+      font-size: 0.9rem;
+    }
+  }
+  &_right {
+    display: flex;
+    align-items: center;
+    &_LOGOUT {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      &_button {
+        background: transparent;
+        border: none;
+        outline: none;
+        font-size: 0.9rem;
+        margin-left: 0.2rem;
+        cursor: pointer;
+      }
+    }
+    &_button {
+      border-radius: 3px;
+      line-height: 20px;
+      transition: all 0.18s ease-in-out 0s;
+      outline: none;
+      cursor: pointer;
+      border: 1px solid rgb(255, 152, 0);
+      color: rgb(255, 152, 0);
+      background: transparent;
+      box-shadow: none;
+      margin-right: 0.7rem;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.9rem;
+      &:hover {
+        background: rgb(255, 152, 0);
+        color: white;
+      }
+      &_paid {
+        background: rgb(255, 152, 0);
+        color: white;
+      }
+    }
+    p {
+      margin-left: 0.4rem;
+    }
+    &_signup {
+      //   color: #78909c;
+      margin-right: 0.5rem;
+      cursor: pointer;
+      font-size: 00.9rem;
+    }
+    &_signin {
+      cursor: pointer;
+      font-size: 00.9rem;
+    }
+    &_or {
+      color: #e0e0e0;
+      margin-right: 0.5rem;
+    }
+    &_login {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      margin: 0 1rem;
+      p {
+        margin-left: 0.7rem;
+      }
+    }
+  }
+}

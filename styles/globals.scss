@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+.head-font {
+  font-family: "Merriweather", serif;
+}
+.paragraph-font {
+  font-family: "Poppins", sans-serif;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  color: hsla(0, 0%, 0%, 0.9);
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  word-wrap: break-word;
+  font-kerning: normal;
+  -moz-font-feature-settings: "kern", "liga", "clig", "calt";
+  -ms-font-feature-settings: "kern", "liga", "clig", "calt";
+  -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
+  font-feature-settings: "kern", "liga", "clig", "calt";
+  position: relative;
+  z-index: 100;
+}
+a {
+  font-family: "Roboto", sans-serif;
+}
+h3 {
+  // font-family: "Roboto", sans-serif;
+  font-family: "Merriweather", "Georgia", serif;
+  font-weight: 900;
+  text-rendering: optimizeLegibility;
+  font-size: 1.4427rem;
+  line-height: 1.1;
+}
+#modal-portal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: aliceblue;
+  z-index: 100;
+}
+#__next {
+  z-index: 50;
+}

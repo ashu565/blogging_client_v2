@@ -1,0 +1,26 @@
+.blog_card {
+  //   border: 1px solid red;
+  &_title {
+    color: #007acc;
+    text-decoration: none;
+    margin: 1rem 0;
+    cursor: pointer;
+  }
+  &_date {
+    font-size: 1rem;
+    font-weight: 400;
+    display: block;
+  }
+  &_tag {
+    margin: 0.7rem 0;
+    padding: 0.4rem;
+    border: 1px solid black;
+    font-size: 1rem;
+    display: inline-block;
+    border-radius: 0.25em;
+  }
+  &_description {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+}

@@ -1,0 +1,52 @@
+.CommentCard {
+  display: flex;
+  align-items: center;
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 0.4rem 0;
+
+  &_Avatar {
+    transform: translateY(-15px);
+    margin-right: 0.5rem;
+  }
+  &_Details {
+    position: relative;
+    max-width: 50%;
+    &_Comment {
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.1);
+      padding: 0.4rem;
+    }
+    span {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    p {
+      font-size: 0.9rem;
+    }
+    img {
+      height: 1rem;
+      position: absolute;
+      right: 1px;
+    }
+    &_Reaction {
+      display: flex;
+      margin-left: 0.8rem;
+      align-items: center;
+      margin-top: 0.1rem;
+      p {
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-right: 0.5rem;
+        color: rgba(0, 0, 0, 0.6);
+        cursor: pointer;
+      }
+      small {
+        font-size: 0.8rem;
+        font-family: Helvetica, Arial, sans-serif;
+        font-weight: 600;
+        margin-right: 0.5rem;
+        color: rgba(0, 0, 0, 0.6);
+      }
+    }
+  }
+}

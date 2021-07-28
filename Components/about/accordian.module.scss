@@ -1,0 +1,35 @@
+.accordian {
+  max-width: 40rem;
+  margin: 0 auto;
+  &_card {
+    background-color: #404040;
+    margin: 0.2rem;
+    cursor: pointer;
+    &_title {
+      padding: 0.6rem;
+      font-family: "Poppins", sans-serif;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+    &_paragraph {
+      background-color: #e6e6e6;
+      font-family: "Poppins", sans-serif;
+      color: #000;
+      font-size: 1rem;
+      line-height: 1.8rem;
+    }
+  }
+}
+.show {
+  visibility: visible;
+  padding: 0.8rem;
+  margin-bottom: -0.2rem;
+  opacity: 1;
+  transition: all 0.3s ease-out;
+}
+.not_show {
+  height: 0;
+  visibility: hidden;
+  opacity: 0;
+}

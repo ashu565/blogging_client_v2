@@ -1,0 +1,24 @@
+.content {
+  height: 15rem;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 14rem;
+  margin: 3rem 0;
+  //   border: 1px solid red;
+}
+.head {
+  color: #808080;
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 1.3rem 0;
+}
+.Content1 {
+  font-size: 1.5rem;
+  display: block;
+}
+.Content2 {
+  font-size: 1.5rem;
+  display: block;
+}
