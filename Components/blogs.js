@@ -2,6 +2,7 @@ import styles from "./blogs.module.scss";
 import Link from "next/link";
 
 export default function blog({ blogs }) {
+  // console.log(blogs);
   const HandleDate = (date) => {
     const dates = date.split("T");
     const dat = dates[0].toString();
@@ -28,6 +29,12 @@ export default function blog({ blogs }) {
     return actual_date_in_string_format;
   };
 
+  const HandleTags = (tags) => {
+    return tags.map((tag) => {
+      return <span className={styles.blog_card_tag}>{tag}</span>;
+    });
+  };
+
   return (
     <>
       {blogs.map((blog) => {
@@ -39,7 +46,7 @@ export default function blog({ blogs }) {
             <span className={styles.blog_card_date}>
               {HandleDate(blog.createdAt)}
             </span>
-            <span className={styles.blog_card_tag}>React</span>
+            <div className={styles.blog_card_tags}>{HandleTags(blog.tags)}</div>
             <p className={styles.blog_card_description}>{blog.description}</p>
           </div>
         );

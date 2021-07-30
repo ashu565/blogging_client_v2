@@ -9,6 +9,9 @@
     border-radius: 0.25em;
     border: 1px solid black;
     cursor: pointer;
+    &_active {
+      background-color: rgb(62, 196, 219);
+    }
     &:hover {
       background-color: rgb(129, 232, 250);
     }

@@ -1,24 +1,22 @@
 import styles from "./tags.module.scss";
-import { useState } from "react";
-export default function tags() {
-  const [tags, setTags] = useState({
-    Javascript: 13,
-    Css: 14,
-    React: 15,
-    "Technical Discussion": 5,
-    "Node Js": 9,
-    Express: 2,
-    "Non Techncical Disscussion": 8,
-    "Mongo DB": 5,
-    Fiction: 154,
-    "Technical Support": 1024,
-  });
+export default function tags({ tags, HandleTagSearch, searchTag }) {
   const tagsRender = () => {
     return Object.keys(tags).map((tag) => {
       return (
-        <div key={tag} className={styles.tags_data}>
-          <h4 className={styles.tags_data_tag}>{tag}</h4>
-          <h4 className={styles.tags_data_length}>{tags[tag]}</h4>
+        <div
+          onClick={HandleTagSearch}
+          key={tag}
+          className={`${styles.tags_data} ${
+            searchTag.includes(tag) ? styles.tags_data_active : styles.tags.data
+          }`}
+          data-tag={tag}
+        >
+          <h4 data-tag={tag} className={styles.tags_data_tag}>
+            {tag}
+          </h4>
+          <h4 data-tag={tag} className={styles.tags_data_length}>
+            {tags[tag]}
+          </h4>
         </div>
       );
     });

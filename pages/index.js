@@ -9,15 +9,19 @@ import { useState, useEffect, useCallback } from "react";
 export const getStaticProps = async () => {
   // This function Runs Only in Server Side So don't use any keyword like document,localStorage,etc
   const res = await api.get("/api/v1/blog/getAllBlog");
+  const tag_count = await api.get("/api/v1/blog/getAllTags");
+  const tag_values = tag_count.data.tag_values_object;
   const data = res.data.document;
   return {
     props: {
       blogs: data,
+      tags: tag_values,
     },
-    revalidate: 1,
+    revalidate: 5,
   };
 };
-export default function Home({ blogs }) {
+export default function Home({ blogs, tags }) {
+  const [searchTag, setSearchTag] = useState([]);
   const [filteredBlogs, setFilteredBlogs] = useState(blogs);
 
   const HandleSearch = async (e) => {
@@ -43,6 +47,36 @@ export default function Home({ blogs }) {
   };
 
   const OptimisedHandleSearch = debounce(HandleSearch);
+  const present = (key_tag) => {
+    const index = searchTag.includes(key_tag);
+    console.log("index of " + key_tag + " " + index);
+    // if (index === -1) {
+    //   return false;
+    // }
+    // return true;
+    return index;
+  };
+  const HandleTagSearch = async (e) => {
+    let filtered_array = [];
+    if (present(e.target.dataset.tag)) {
+      const duplicate = [...searchTag];
+      filtered_array = duplicate.filter((tag) => {
+        return tag !== e.target.dataset.tag;
+      });
+    } else {
+      filtered_array = [...searchTag];
+      filtered_array.push(e.target.dataset.tag);
+    }
+    const document = await api.post("/api/v1/blog/getTaggedBlogs", {
+      tags: filtered_array,
+    });
+    setSearchTag(filtered_array);
+    if (filtered_array.length === 0) {
+      setFilteredBlogs(blogs);
+    } else {
+      setFilteredBlogs(document.data.document);
+    }
+  };
 
   return (
     <>
@@ -57,7 +91,12 @@ export default function Home({ blogs }) {
             className={styles.Blog_Search_Box}
           />
         </div>
-        <Tags className={styles.Blog_Tags} />
+        <Tags
+          HandleTagSearch={HandleTagSearch}
+          tags={tags}
+          className={styles.Blog_Tags}
+          searchTag={searchTag}
+        />
         <Link href="/most-liked">
           <button className={styles.Blog_mostLiked}>
             View Most Popular Blogs
