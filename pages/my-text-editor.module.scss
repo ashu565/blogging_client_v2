@@ -1,20 +1,60 @@
-.container {
+.parent {
   background: #f8f9fa;
-  min-height: 90vh;
   width: 100%;
+}
+.container {
+  width: 80%;
+  min-height: 90vh;
+  margin: 0 auto;
+  &_title_box {
+    margin: 2rem 0;
+  }
+  &_title {
+    text-transform: uppercase;
+    color: #f17421;
+  }
+  &_text_title {
+    max-width: 100%;
+    margin: 0.5rem auto;
+    border: 1px solid #cfd8dc;
+    background: #fff;
+    padding: 0.3rem;
+    font-size: 1.2rem;
+    outline: none;
+  }
   &_toolbar {
     position: sticky;
+    top: 0;
     display: flex;
     justify-content: center;
     z-index: 50;
     margin: 0 auto;
+    margin-top: 0.5rem;
+    border: 1px solid #cfd8dc;
+    border-bottom: none;
   }
   &_editor {
-    margin: 4rem auto;
     background: #fff;
-    max-width: 80%;
-    margin-bottom: 12rem;
+    margin-bottom: 2rem;
+    border: 1px solid #cfd8dc;
+    border-top: none;
     padding: 2rem;
-    box-shadow: 1px 5px 7px 0px rgba(0, 0, 0, 0.2);
+  }
+  button {
+    border: none;
+    outline: none;
+    background: #f17421;
+    color: white;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    border-radius: 30px;
+    padding: 0.7rem 1.2rem;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    align-self: flex-start;
+    &:hover {
+      background: #f17421;
+      transform: translateY(-1px);
+    }
   }
 }

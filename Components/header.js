@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 
 export default function Header() {
   const router = useRouter();
-  const [login, setLogin] = useState(true);
+  const [login, setLogin] = useState(false);
   const [user, setUser] = useState({});
   useEffect(async () => {
     try {
@@ -45,9 +45,9 @@ export default function Header() {
           <Link href="/premium">
             <a>Premium Membership</a>
           </Link>
-          {/* <Link> */}
-          <a>Terms & Conditions</a>
-          {/* </Link> */}
+          <Link href="/my-text-editor">
+            <a>Write a Blog</a>
+          </Link>
         </div>
         {login === false ? (
           <div className={styles.header_right}>

@@ -16,6 +16,7 @@ export default function blog({
   HandleLikes,
   isLike,
   totalLikes,
+  admin,
 }) {
   return (
     <div className={styles.parent_container}>
@@ -72,6 +73,7 @@ export default function blog({
             HandleCommentChange={HandleCommentChange}
             user={user}
             comments={comments}
+            admin={admin}
           />
         </div>
       </div>

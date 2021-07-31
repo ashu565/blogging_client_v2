@@ -1,7 +1,12 @@
 import styles from "./comment.module.scss";
 import Avatar from "@material-ui/core/Avatar";
 import api from "../api/api";
-export default function CommentCard({ comment, user, HandleCommentChange }) {
+export default function CommentCard({
+  comment,
+  user,
+  HandleCommentChange,
+  admin,
+}) {
   if (!comment.user) {
     return null;
   }
@@ -27,7 +32,7 @@ export default function CommentCard({ comment, user, HandleCommentChange }) {
         </div>
         <div className={styles.CommentCard_Details_Reaction}>
           <p>Like</p>
-          {comment.user._id === user ? (
+          {user === admin || comment.user._id === user ? (
             <p onClick={HandleCommentDelete}>Delete</p>
           ) : null}
           <small>7h</small>

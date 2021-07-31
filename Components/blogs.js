@@ -1,6 +1,6 @@
 import styles from "./blogs.module.scss";
 import Link from "next/link";
-
+import ContentEditable from "react-contenteditable";
 export default function blog({ blogs }) {
   // console.log(blogs);
   const HandleDate = (date) => {
@@ -47,7 +47,11 @@ export default function blog({ blogs }) {
               {HandleDate(blog.createdAt)}
             </span>
             <div className={styles.blog_card_tags}>{HandleTags(blog.tags)}</div>
-            <p className={styles.blog_card_description}>{blog.description}</p>
+            <ContentEditable
+              disabled="true"
+              html={blog.description}
+              className={styles.blog_card_description}
+            />
           </div>
         );
       })}

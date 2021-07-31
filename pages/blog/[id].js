@@ -5,7 +5,18 @@ import api from "../../Components/api/api";
 import Header from "../../Components/header";
 import { useRouter } from "next/router";
 import toast, { Toaster } from "react-hot-toast";
+import Chip from "@material-ui/core/Chip";
+import Avatar from "@material-ui/core/Avatar";
+import dynamic from "next/dynamic";
 
+import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
+
+const Editor = dynamic(
+  () => import("react-draft-wysiwyg").then((module) => module.Editor),
+  {
+    ssr: false,
+  }
+);
 export const getStaticPaths = async () => {
   const res = await api.get("/api/v1/blog/getAllBlog");
   const data = res.data.document;
@@ -29,7 +40,7 @@ export const getStaticProps = async ({ params }) => {
     props: {
       blog: data,
     },
-    revalidate: 1, // Incremental Site Generation
+    revalidate: 5, // Incremental Site Generation
   };
 };
 
@@ -44,6 +55,10 @@ export default function blog({ blog }) {
   const [page, setPage] = useState(1);
   const [display, setDisplay] = useState(false);
   const [totalLikes, setTotalLikes] = useState(blog.likes);
+  const [admin, setAdmin] = useState(blog.author._id);
+  const [editorState, setEditorState] = useState(
+    EditorState.createWithContent(convertFromRaw(JSON.parse(blog.body)))
+  );
 
   useEffect(async () => {
     if (user) {
@@ -85,6 +100,7 @@ export default function blog({ blog }) {
       };
       const res = await api.get("/api/v1/auth/getuser", config);
       setUser(res.data.data.user._id);
+
       const userId = res.data.data.user._id;
       const index = blog.Likes.indexOf(userId);
       if (index !== -1) {
@@ -117,88 +133,6 @@ export default function blog({ blog }) {
     setCommented(false);
   }, [commented]);
 
-  const renderElement = (element) => {
-    switch (element.type) {
-      case "header":
-        const { level } = element.data;
-        if (parseInt(level) === 1) {
-          return (
-            <h1 className={styles.container_header}>{element.data.text}</h1>
-          );
-        } else if (parseInt(level) === 2) {
-          return (
-            <h2 className={styles.container_header}>{element.data.text}</h2>
-          );
-        } else if (parseInt(level) === 3) {
-          return (
-            <h3 className={styles.container_header}>{element.data.text}</h3>
-          );
-        } else {
-          return (
-            <h4 className={styles.container_header}>{element.data.text}</h4>
-          );
-        }
-        break;
-      case "paragraph":
-        return (
-          <p className={styles.container_paragraph}>{element.data.text}</p>
-        );
-        break;
-      case "list":
-        if (element.data.style === "unordered") {
-          return (
-            <ul className={styles.container_list}>
-              {element.data.items.map((item) => {
-                return <li className={styles.container_list_item}>{item}</li>;
-              })}
-            </ul>
-          );
-        } else {
-          return (
-            <ol className={styles.container_list}>
-              {element.data.items.map((item) => {
-                return <li className={styles.container_list_item}>{item}</li>;
-              })}
-            </ol>
-          );
-        }
-        break;
-      case "code":
-        const { code } = element.data;
-        const code_data = code.split("\n");
-        return (
-          <div className={styles.container_code}>
-            {code_data.map((str) => {
-              return <p className={styles.container_code_text}>{str}</p>;
-            })}
-          </div>
-        );
-        break;
-      case "delimiter":
-        return <p className={styles.container_delimiter}>* * *</p>;
-        break;
-      case "table":
-        const { content } = element.data;
-        return (
-          <table className={styles.container_table}>
-            {content.map((rowDataInArray) => {
-              return (
-                <tr className={styles.container_table_row}>
-                  {rowDataInArray.map((data) => {
-                    return (
-                      <td className={styles.container_table_row_data}>
-                        {data}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </table>
-        );
-        break;
-    }
-  };
   const HandleSubmitComment = async () => {
     if (comment) {
       const { id } = router.query;
@@ -229,25 +163,45 @@ export default function blog({ blog }) {
     setPage(pg + 1);
     setMoreComments(() => !more_comments);
   };
-
+  const HandleTags = (tags) => {
+    return tags.map((tag) => {
+      return <span className={styles.container_tag}>{tag}</span>;
+    });
+  };
+  const name = `${blog.author.first_name} ${blog.author.last_name}`;
   return (
     <div className={styles.parent_container}>
       <Toaster />
       <Header />
       <div className={styles.container}>
         <h1 className={styles.container_title}>{blog.title}</h1>
-        {/* {data.map((element) => {
-          return <div>{renderElement(element)}</div>;
-        })} */}
+        <div className={styles.container_tags}>{HandleTags(blog.tags)}</div>
+        <Chip
+          avatar={<Avatar alt="" src={blog.author.avatar} />}
+          label={name}
+        />
+        <Editor
+          editorState={editorState}
+          toolbarClassName={styles.container_toolbar}
+          editorClassName={styles.container_editor}
+          readOnly="true"
+        />
       </div>
       <Reaction
         HandleInput={(e) => setComment(e.target.value)}
         HandleSubmitComment={HandleSubmitComment}
         comments={comments}
         user={user}
+        admin={admin}
         HandleCommentChange={() => setCommented(true)}
         comment={comment}
-        HandleLikes={() => setIsLike(!isLike)}
+        HandleLikes={() => {
+          if (user) {
+            setIsLike(!isLike);
+          } else {
+            toast.error("You Are Not Logged In,Please get Logged In");
+          }
+        }}
         isLike={isLike}
         totalLikes={totalLikes}
       />
