@@ -88,21 +88,17 @@ export default function myeditor() {
       body,
       author,
     };
-    const myPromise = api.post(
-      "/api/v1/blog/createBlog",
-      editor_content,
-      config
-    );
-    toast.promise(myPromise, {
-      loading: "Sending...",
-      success: (res) => {
-        router.push("/");
-        return `Thanks For Writing the Blog`;
-      },
-      error: (err) => {
-        return `${err.response.message}`;
-      },
-    });
+    try {
+      const myPromise = await api.post(
+        "/api/v1/blog/createBlog",
+        editor_content,
+        config
+      );
+      toast.success("Thanks for writing a Blog");
+      router.push('/');
+    }catch(err) {
+      toast.error("Server is Busy ! Please Write after sometime");
+    }
   };
   if (!login) {
     return <h1>You are not logged in, please log in</h1>;

@@ -5,6 +5,8 @@ import styles from "./header.module.scss";
 import api from "./api/api";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import slugify from 'react-slugify';
+
 
 export default function Header() {
   const router = useRouter();
@@ -28,7 +30,8 @@ export default function Header() {
   }, [login]);
 
   const HandleProfileClick = () => {
-    router.push(`/profile/${user.first_name}`);
+    const slug = slugify(user.first_name);
+    router.push(`/profile/${slug}`);
   };
 
   return (
