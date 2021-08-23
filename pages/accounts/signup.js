@@ -34,6 +34,7 @@ export default function signUp() {
           return "success";
         },
         error: (err) => {
+          console.log(err);
           return `${err.response.data.message}`;
         },
       },
@@ -56,9 +57,6 @@ export default function signUp() {
             <input
               className={styles.signup_form_input_data}
               onChange={(e) => setFirst_name(e.target.value)}
-              autoCapitalize="off"
-              autoComplete="off"
-              spellCheck="false"
               placeholder="First Name"
               name="first_name"
             />
@@ -66,9 +64,6 @@ export default function signUp() {
           <label className={styles.signup_form_input}>
             <input
               className={styles.signup_form_input_data}
-              autoCapitalize="off"
-              autoComplete="off"
-              spellCheck="false"
               placeholder="Last Name"
               name="last_name"
               onChange={(e) => setLast_name(e.target.value)}
@@ -77,9 +72,6 @@ export default function signUp() {
           <label className={styles.signup_form_input}>
             <input
               className={styles.signup_form_input_data}
-              autoCapitalize="off"
-              autoComplete="off"
-              spellCheck="false"
               placeholder="Password"
               type="password"
               name="password"
@@ -89,9 +81,6 @@ export default function signUp() {
           <label className={styles.signup_form_input}>
             <input
               className={styles.signup_form_input_data}
-              autoCapitalize="off"
-              autoComplete="off"
-              spellCheck="false"
               placeholder="Confirm Password"
               type="password"
               name="passwordConfirm"
@@ -101,9 +90,6 @@ export default function signUp() {
           <label className={styles.signup_form_input}>
             <input
               className={styles.signup_form_input_data}
-              autoCapitalize="off"
-              autoComplete="off"
-              spellCheck="false"
               placeholder="Email-address"
               type="email"
               name="email"

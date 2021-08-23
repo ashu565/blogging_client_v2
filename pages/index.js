@@ -49,11 +49,6 @@ export default function Home({ blogs, tags }) {
   const OptimisedHandleSearch = debounce(HandleSearch);
   const present = (key_tag) => {
     const index = searchTag.includes(key_tag);
-    console.log("index of " + key_tag + " " + index);
-    // if (index === -1) {
-    //   return false;
-    // }
-    // return true;
     return index;
   };
   const HandleTagSearch = async (e) => {
@@ -82,7 +77,7 @@ export default function Home({ blogs, tags }) {
     <>
       <Header />
       <div className={styles.Blog}>
-        <h1 className={styles.Blog_Heading}>Ashutosh's Blogs</h1>
+        <h1 className={styles.Blog_Heading}>Blogger's World</h1>
         <div className={styles.Blog_Search}>
           <h4>Search</h4>
           <input

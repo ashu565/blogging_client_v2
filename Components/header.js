@@ -66,7 +66,7 @@ export default function Header() {
           <div className={styles.header_right}>
             <Link href="/premium">
               {user.premium === false ? (
-                <button className={styles.header_right_button}>Premum</button>
+                <button className={styles.header_right_button}>Premium</button>
               ) : (
                 <button
                   className={`

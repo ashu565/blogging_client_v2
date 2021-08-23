@@ -31,7 +31,7 @@ export default function blog({ blogs }) {
 
   const HandleTags = (tags) => {
     return tags.map((tag) => {
-      return <span className={styles.blog_card_tag}>{tag}</span>;
+      return <span key = {tag} className={styles.blog_card_tag}>{tag}</span>;
     });
   };
 
@@ -40,15 +40,17 @@ export default function blog({ blogs }) {
       {blogs.map((blog) => {
         return (
           <div key={blog._id} className={styles.blog_card}>
-            <Link href={"/blog/" + blog._id}>
-              <h3 className={styles.blog_card_title}>{blog.title}</h3>
-            </Link>
-            <span className={styles.blog_card_date}>
-              {HandleDate(blog.createdAt)}
-            </span>
+            <div className = {styles.blog_card_title_date} >
+              <Link href={"/blog/" + blog._id}>
+                <h4 className={styles.blog_card_title}>{blog.title}</h4>
+              </Link>
+              <span className={styles.blog_card_date}>
+                {HandleDate(blog.createdAt)}
+              </span>
+            </div>
             <div className={styles.blog_card_tags}>{HandleTags(blog.tags)}</div>
             <ContentEditable
-              disabled="true"
+              disabled={true}
               html={blog.description}
               className={styles.blog_card_description}
             />
