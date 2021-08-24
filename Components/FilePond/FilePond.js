@@ -20,8 +20,8 @@ export default function App({ HandleUpload }) {
         allowMultiple={false}
         maxFiles={1}
         server={{
-          url: "http://127.0.0.1:3000/api/v1/auth/updateProfilePhoto",
-          // url: "https://blogger414.herokuapp.com/api/v1/auth/updateProfilePhoto",
+          // url: "http://127.0.0.1:3000/api/v1/auth/updateProfilePhoto",
+          url: "https://blogger414.herokuapp.com/api/v1/auth/updateProfilePhoto",
           process: {
             headers: {
               authorization: render ? localStorage.getItem("token") : null, // localStorage is only available in client side if not done like this it will lead to the error
