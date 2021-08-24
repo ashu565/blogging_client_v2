@@ -46,6 +46,9 @@ export const getStaticProps = async ({ params }) => {
 
 export default function blog({ blog }) {
   const router = useRouter();
+  if (router.isFallback) {
+    return <h1>Loading...</h1>;
+  }
   const [isLike, setIsLike] = useState(false); // stores whether user has Liked or Not
   const [comment, setComment] = useState(""); // stores the comment input by user
   const [comments, setComments] = useState([]); // Array of objects of comments with details
@@ -169,9 +172,7 @@ export default function blog({ blog }) {
     });
   };
   const name = `${blog.author.first_name} ${blog.author.last_name}`;
-  if (router.isFallback) {
-    return <h1>Loading...</h1>;
-  }
+
   return (
     <div className={styles.parent_container}>
       <Toaster />
