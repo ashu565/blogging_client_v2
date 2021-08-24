@@ -29,7 +29,7 @@ export const getStaticPaths = async () => {
   });
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 
@@ -169,6 +169,9 @@ export default function blog({ blog }) {
     });
   };
   const name = `${blog.author.first_name} ${blog.author.last_name}`;
+  if (router.isFallback) {
+    return <h1>Loading...</h1>;
+  }
   return (
     <div className={styles.parent_container}>
       <Toaster />

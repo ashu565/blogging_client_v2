@@ -17,7 +17,7 @@ export const getStaticProps = async () => {
       blogs: data,
       tags: tag_values,
     },
-    // revalidate: 5,
+    revalidate: 1,
   };
 };
 export default function Home({ blogs, tags }) {
